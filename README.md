@@ -31,7 +31,7 @@ Just tell your agent: *"Set up the Excalidraw diagram skill renderer by followin
 **Option B: Manual**
 
 ```bash
-cd .claude/skills/excalidraw-diagram/references
+cd <this skill directory>/references
 uv sync
 uv run playwright install chromium
 ```

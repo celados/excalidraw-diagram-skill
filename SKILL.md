@@ -451,10 +451,10 @@ You cannot judge a diagram from JSON alone. After generating or editing the Exca
 ### How to Render
 
 ```bash
-cd .claude/skills/excalidraw-diagram/references && uv run python render_excalidraw.py <path-to-file.excalidraw>
+cd <this skill directory>/references && uv run python render_excalidraw.py <path-to-file.excalidraw>
 ```
 
-This outputs a PNG next to the `.excalidraw` file. Then use the **Read tool** on the PNG to actually view it.
+This outputs a PNG next to the `.excalidraw` file. The renderer loads Excalidraw 0.18.0 from esm.sh (pinned: the unpinned `?bundle` resolves a dependency that 404s) and passes `HTTPS_PROXY`/`HTTP_PROXY` to Chromium, so it needs network access and works behind a local proxy. Then use the **Read tool** on the PNG to actually view it.
 
 ### The Loop
 
@@ -503,7 +503,7 @@ The loop is done when:
 ### First-Time Setup
 If the render script hasn't been set up yet:
 ```bash
-cd .claude/skills/excalidraw-diagram/references
+cd <this skill directory>/references
 uv sync
 uv run playwright install chromium
 ```

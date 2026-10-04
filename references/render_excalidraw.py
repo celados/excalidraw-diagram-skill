@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -124,7 +125,13 @@ def render(
 
     with sync_playwright() as p:
         try:
-            browser = p.chromium.launch(headless=True)
+            # Chromium ignores HTTP(S)_PROXY; pass it through so esm.sh loads behind a proxy.
+            proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy") or os.environ.get("HTTP_PROXY") or os.environ.get("http_proxy")
+            launch_args = {"headless": True}
+            if proxy:
+                no_proxy = os.environ.get("NO_PROXY") or os.environ.get("no_proxy")
+                launch_args["proxy"] = {"server": proxy, **({"bypass": no_proxy} if no_proxy else {})}
+            browser = p.chromium.launch(**launch_args)
         except Exception as e:
             if "Executable doesn't exist" in str(e) or "browserType.launch" in str(e):
                 print("ERROR: Chromium not installed for Playwright.", file=sys.stderr)
