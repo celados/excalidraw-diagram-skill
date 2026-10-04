@@ -9,15 +9,14 @@ Compatible with any coding agent that supports skills. For agents that read from
 - **Diagrams that argue, not display.** Every shape/group of shapes mirrors the concept it represents — fan-outs for one-to-many, timelines for sequences, convergence for aggregation. No uniform card grids.
 - **Evidence artifacts.** As an example, technical diagrams include real code snippets and actual JSON payloads.
 - **Built-in visual validation.** A Playwright-based render pipeline lets the agent see its own output, catch layout issues (overlapping text, misaligned arrows, unbalanced spacing), and fix them in a loop before delivering.
-- **Brand-customizable.** All colors and brand styles live in a single file (`references/color-palette.md`). Swap it out and every diagram follows your palette.
+- **Brand-customizable.** All colors and brand styles live in a single file (`skills/excalidraw/references/color-palette.md`). Swap it out and every diagram follows your palette.
 
 ## Installation
 
-Clone or download this repo, then copy it into your project's `.claude/skills/` directory:
+Celados fork of [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill). Install with the `skill` CLI (installs as `excalidraw-celados`):
 
 ```bash
-git clone https://github.com/coleam00/excalidraw-diagram-skill.git
-cp -r excalidraw-diagram-skill .claude/skills/excalidraw-diagram
+skill install "{ repo: ['celados/excalidraw-diagram-skill'], global: true }"
 ```
 
 ## Setup
@@ -46,12 +45,12 @@ The skill handles the rest — concept mapping, layout, JSON generation, renderi
 
 ## Customize Colors
 
-Edit `references/color-palette.md` to match your brand. Everything else in the skill is universal design methodology.
+Edit `skills/excalidraw/references/color-palette.md` to match your brand. Everything else in the skill is universal design methodology.
 
 ## File Structure
 
 ```
-excalidraw-diagram/
+skills/excalidraw/
   SKILL.md                          # Design methodology + workflow
   references/
     color-palette.md                # Brand colors (edit this to customize)
